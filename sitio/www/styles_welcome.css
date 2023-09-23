@@ -1,0 +1,56 @@
+#principal{
+    border: solid 1px black;
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
+}
+fieldset{
+    margin-bottom: 10px;
+}
+legend{
+    border: solid 1px violet;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 20px;
+    background:lightblue;
+    text-align: center;
+    display: flex;
+}
+#mifoto{
+    margin: 5px;
+    border: solid 4px black;
+}
+body{
+    background: url(fondo.jpg);
+    background-size: 50%;
+}
+ul{
+    color: black;
+}
+h1{
+    color: black;
+}
+h2{
+    color: black;
+}
+div.contenedor {
+    margin: 5px 10px;
+    box-shadow: 0 4px 8px 0 lightskyblue,0 6px 20px 0 rgba(0,0,0,10);
+    float: left;
+    width: 350px;
+}
+div.contenedor img{
+    width: 40%;
+    height: auto;
+    margin-left: 100px;
+}
+div.contenedor:hover{
+    border: 1px solid lightcoral;
+    transform: rotate(-3deg);
+}
+div.pie{
+    text-align: center;
+    text-shadow: 2px 2px 5px black;
+    padding: 10px;
+    color: white;
+}

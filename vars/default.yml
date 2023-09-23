@@ -1,0 +1,7 @@
+---
+mysql_root_password: " "
+app_user: "johnpeter"
+http_host: "app.JGutierrez.com"
+http_conf: "app.JGutierrez.com.conf"
+http_port: "80"
+disable_default: true

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="section-header">
+            <h2>Iniciar Sesión</h2>
+        </div>
+        <div class="section-content">
+            <form id="loginForm" method="POST" action="login.php">
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container add-user-form">
+        <div class="section-header">
+            <h2>Crear Cuenta</h2>
+        </div>
+        <div class="section-content">
+            <form id="addUserForm">
+                <label for="newUsername">Nuevo Usuario:</label>
+                <input type="text" id="newUsername" name="newUsername" required>
+                <br>
+                <label for="newPassword">Nueva Contraseña:</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+                <br>
+                <button type="button" id="addUserButton">Crear Cuenta</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript para manejar el formulario y el botón "Agregar Usuario"
+        document.addEventListener("DOMContentLoaded", function () {
+            const addUserForm = document.getElementById("addUserForm");
+            const addUserButton = document.getElementById("addUserButton");
+
+            // Evento clic en el botón "Agregar Usuario"
+            addUserButton.addEventListener("click", function () {
+                const newUsername = document.getElementById("newUsername").value;
+                const newPassword = document.getElementById("newPassword").value;
+
+                // Realiza una solicitud al servidor para agregar el usuario
+                fetch("add_user.php", {
+                    method: "POST",
+                    body: JSON.stringify({ username: newUsername, password: newPassword }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Usuario agregado con éxito.");
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        alert("Error al agregar usuario: " + error.message);
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
