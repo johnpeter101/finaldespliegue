@@ -1,34 +1,32 @@
 <?php
-// Configura la conexión a la base de datos
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "miapp";
+$dbname = "miapp";
 
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verifica si la conexión es exitosa
 if ($conn->connect_error) {
-    die("La conexión a la base de datos falló: " . $conn->connect_error);
+    die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Obtiene los datos del formulario
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+$usuario = $_POST['usuario_login'];
+$password = $_POST['password_login'];
 
-    // Consulta la base de datos para verificar las credenciales
-    $sql = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password'";
-    $result = $conn->query($sql);
+$sql = "SELECT * FROM usuarios WHERE username='$usuario'";
+$result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
-        // Inicio de sesión exitoso
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    if ($password === $row['password']) {
         header("Location: welcome.html");
     } else {
-        // Credenciales incorrectas
-        echo "Nombre de usuario o contraseña incorrectos.";
+        echo "<script>alert('Contraseña Incorrecta'); window.location.href = 'index.html';</script>";
     }
+} else {
+    echo "<script>alert('Usuario no encontrado'); window.location.href = 'index.html';</script>";
 }
 
-$conn->close();
-?>
